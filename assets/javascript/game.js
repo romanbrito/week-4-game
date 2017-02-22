@@ -5,16 +5,20 @@ function player(name, health, attack, counter, id, imageUrl) {
     this.counterAttack = counter;
     this.id = id;
     this.image = imageUrl;
-    this.currentHealth = function (damage) {
-        var playerHealth = this.healthPoints - damage;
-        return playerHealth;
+    this.currentHealth = function (damage, healthO, match) {
+        if (match > 0) {
+            return healthO - damage;
+        } else {
+            var playerHealth = this.healthPoints - damage;
+            return playerHealth;
+        }
     }
 }
 
-var yoda = new player("Yoda", 120, 8, 5, "yoda", "assets/images/yoda.png");
-var rey = new player("Rey", 100, 5, 5, "rey", "assets/images/rey.png");
-var vader = new player("Darth Vader", 150, 5, 20, "vader", "assets/images/darth_vader.png");
-var kylo = new player("Kylo Ren", 180, 5, 25, "kylo", "assets/images/kylo.png");
+var yoda = new player("Yoda", 130, 15, 5, "yoda", "assets/images/yoda.png");
+var rey = new player("Rey", 100, 10, 5, "rey", "assets/images/rey.png");
+var vader = new player("Darth Vader", 150, 5, 15, "vader", "assets/images/darth_vader.png");
+var kylo = new player("Kylo Ren", 180, 5, 20, "kylo", "assets/images/kylo.png");
 
 var players = [yoda, rey, vader, kylo];
 
@@ -77,6 +81,7 @@ var j = 0;
 var r = 0;
 var attackerHealth = null;
 var defenderHealth = null;
+var matchNumber = 0;
 $("#attackButton").on("click", function () {
     if (attacker != null && defender != null) {
         if (restart === false) {
@@ -85,7 +90,9 @@ $("#attackButton").on("click", function () {
             j = j + attackPoints;
             //defender counter
             r++;
-            attackerHealth = attacker.currentHealth(defender.counterAttack * r);
+
+            attackerHealth = attacker.currentHealth(defender.counterAttack * r, attackerHealth, matchNumber);
+
             defenderHealth = defender.currentHealth(attacker.attackPower * j);
             // attacker information
             $("#yourCharacter h2").eq(1).html(attackerHealth);
@@ -106,6 +113,7 @@ $("#attackButton").on("click", function () {
                 defender = null;
                 r = 0;
                 j = 0;
+                matchNumber++;
                 $("#attackInfo").empty();
                 $("#versus").empty();
             }
