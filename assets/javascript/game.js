@@ -66,24 +66,27 @@ $(document).on("click", ".ready", function () {
         $("#defender").append(characterName);
         $("#defender").append(characterImage);
         $("#defender").append(characterHealth);
+        defenderHealth = defender.healthPoints;
     }
 });
 
 $("#restartButton").hide();
 var restart = false;
-var i = 0;
+var attackPoints = 0;
 var j = 0;
 var r = 0;
+var attackerHealth = null;
+var defenderHealth = null;
 $("#attackButton").on("click", function () {
     if (attacker != null && defender != null) {
         if (restart === false) {
             //attacker attack
-            i++;
-            j = j + i;
+            attackPoints++;
+            j = j + attackPoints;
             //defender counter
             r++;
-            var attackerHealth = attacker.currentHealth(defender.counterAttack * r);
-            var defenderHealth = defender.currentHealth(attacker.attackPower * j);
+            attackerHealth = attacker.currentHealth(defender.counterAttack * r);
+            defenderHealth = defender.currentHealth(attacker.attackPower * j);
             // attacker information
             $("#yourCharacter h2").eq(1).html(attackerHealth);
             // defender information
@@ -92,11 +95,9 @@ $("#attackButton").on("click", function () {
             if (attackerHealth <= 0) {
                 battleInfo = "You have been defeated ... GAME OVER!!! <br>";
                 restart = true;
-                attacker = null;
-                defender = null;
                 $("#restartButton").show();
             } else {
-                battleInfo = "You attacked " + defender.name + " for " + attacker.attackPower * i;
+                battleInfo = "You attacked " + defender.name + " for " + attacker.attackPower * attackPoints;
                 battleInfo += "<br>" + defender.name + " attacked you back for " + defender.counterAttack + " damage";
             }
             if (defenderHealth <= 0) {
@@ -104,6 +105,7 @@ $("#attackButton").on("click", function () {
                 secondSelected = false;
                 defender = null;
                 r = 0;
+                j = 0;
                 $("#attackInfo").empty();
                 $("#versus").empty();
             }
@@ -113,7 +115,7 @@ $("#attackButton").on("click", function () {
 });
 
 $("#restartButton").on("click", function () {
-    i = 0;
+    attackPoints = 0;
     j = 0;
     r = 0;
     firstSelected = false;
