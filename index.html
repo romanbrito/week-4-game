@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Latest compiled and minified CSS bootsrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--    custom style-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Week-4-Game</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Star Wars RPG (Lego)</h1>
+        <div class="row">
+            <div id="characters"></div>
+        </div>
+        <button type="button" name="button" class="btn default" id="attackButton">attack</button>
+        <button type='button' name='button' class='btn default' id='restartButton'>restart</button>
+        <div class="row">
+            <div id="yourCharacter" class="col-md-5"></div>
+            <div id="versus" class="col-md-2"></div>
+            <div id="defender" class="col-md-5"></div>
+        </div>
+        <div class="row">
+            <h3 id="attackInfo"></h3>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <!-- custom script -->
+    <script src="assets/javascript/game.js"></script>
+</body>
+</html>
